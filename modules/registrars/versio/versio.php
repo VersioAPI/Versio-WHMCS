@@ -305,7 +305,7 @@ function versio_SaveNameservers($params)
 
 	//domain
 	$sld = $params['sld'];
-    $tld = $params['tld'];
+  $tld = $params['tld'];
 
 	$domainDetails = array();
 	$ns = array();
@@ -781,7 +781,7 @@ function versio_Sync($params)
 
 	//domain
 	$sld = $params['sld'];
-    $tld = $params['tld'];
+  $tld = $params['tld'];
 
 	$response = $versio->request('GET', '/domains/'.$sld.'.'.$tld);
 
@@ -795,7 +795,10 @@ function versio_Sync($params)
 
 		switch ($status) {
     case "OK":
-		return array('dnsmanagement' => $dns_management, 'expirydate' => response['domainInfo']['expire-date'], 'active' => true);
+		return array(
+    'dnsmanagement' => $dns_management,
+    'expirydate' => $response['domainInfo']['expire-date'],
+    'active' => true);
         break;
     case "PENDING":
         return array('active' => false);
@@ -807,8 +810,10 @@ function versio_Sync($params)
         return array('active' => false);
         break;
     default:
-        $returnstatus = array('active' => true);
-		 return array('dnsmanagement' => $dns_management, 'expirydate' => response['domainInfo']['expire-date'], 'active' => true);
+        return array(
+         'dnsmanagement' => $dns_management,
+         'expirydate' => $response['domainInfo']['expire-date'],
+         'active' => true);
 }
 
 		}
