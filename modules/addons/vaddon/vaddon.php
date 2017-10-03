@@ -88,8 +88,8 @@ function vaddon_output($vars)
 
 	  $username = $vars['Username'];
     $password = $vars['Password'];
-    $endpoint = $params['Site-version'];
-    $testmode = $params['TestMode'];
+    $endpoint = $vars['Site-version'];
+    $testmode = $vars['TestMode'];
 
   $versio = new Versio_API();
   $versio->setApi_login($username, $password, $endpoint);
